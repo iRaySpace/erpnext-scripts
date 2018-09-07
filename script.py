@@ -18,9 +18,7 @@ def disable_existing_items(**kwargs):
         # Logging the process
         print "Processing item {0}/{1}.".format(cur_index, max_index)
 
-        item_doc = frappe.get_doc('Item', item.name)
-        item_doc.disabled = 1
-        item_doc.save()
+        frappe.db.set_value('Item', item.name, 'disabled', 1)
 
         cur_index = cur_index + 1
 

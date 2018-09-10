@@ -1,8 +1,8 @@
 import frappe
 
 
-def set_as_sales_item(**kwargs):
-    """Setting items as sales item"""
+def set_item_default_warehouse(**kwargs):
+    """Setting items default warehouse"""
     items = frappe.get_all('Item', filters={'disabled': 0, 'name': ('like', '%{0}%'.format(kwargs['keyword']))}, fields=['name'])
 
     print "---"

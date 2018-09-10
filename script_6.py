@@ -15,10 +15,10 @@ def set_item_default_warehouse(**kwargs):
     for item in items:
         print "Processing item {0}/{1}.".format(cur_index, max_index)
 
-        frappe.db.set_value('Item', item.name, 'is_sales_item', 1)
+        frappe.db.set_value('Item', item.name, 'default_warehouse', kwargs['warehouse'])
 
         cur_index = cur_index + 1
 
     print "---"
-    print "Finished setting as sales items..."
+    print "Finished setting the default warehouse..."
     print "---"

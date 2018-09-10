@@ -2,8 +2,8 @@ import frappe
 
 
 def disable_existing_items(**kwargs):
-    """Disable existing ERPNext items based on the 'not like' keyword given."""
-    items = frappe.get_all('Item', filters={'name': ('not like', '%{0}%'.format(kwargs['keyword']))}, fields=['name'])
+    """Disable existing ERPNext items based on the 'not like/like' keyword given."""
+    items = frappe.get_all('Item', filters={'disabled': 0, 'name': (kwargs['condition'], '%{0}%'.format(kwargs['keyword']))}, fields=['name'])
 
     print "---"
     print "Disabling items..."

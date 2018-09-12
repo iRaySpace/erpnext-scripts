@@ -11,7 +11,7 @@ def set_field_included_in_listview(*args, **kwargs):
 
     for field in args:
         # Get the field and set to be included in the list view
-        d.get("fields", {'fieldname': kwargs['field']})[0].in_list_view = 1
+        d.get("fields", {'fieldname': field})[0].in_list_view = 1
 
     # Save the form
     d.run_method("save_customization")

@@ -7,7 +7,6 @@ def set_all_item_field_value(**kwargs):
     # Filters
     filters = {
         'disabled': 0,
-        'is_purchase_item': 0,
         'name': ('like', '%{0}%'.format(kwargs['keyword']))
     }
 

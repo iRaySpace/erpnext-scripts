@@ -29,5 +29,5 @@ def set_all_item_field_value(**kwargs):
         cur_index = cur_index + 1
 
     print "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-="
-    print "Done setting {1} items.".format(max_index)
+    print "Done setting {0} items.".format(max_index)
     print "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-="

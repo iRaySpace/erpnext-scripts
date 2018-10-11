@@ -5,7 +5,7 @@ from frappe import get_site_path
 
 
 def rearrange_fields(**kwargs):
-    """Using the file uploaded, update the DocField idx for rearrangement"""
+    """Using the file uploaded, update he DocField idx for rearrangement"""
     file_path = get_site_path('public', 'files', kwargs['file'])
 
     with open(file_path) as csv_file:

@@ -12,10 +12,20 @@ def update_item_price(**kwargs):
         for row in reader:
             print 'Processing {0}.'.format(row['item_code'])
 
-            item_price_query = frappe.db.sql("""SELECT name FROM `tabItem Price` WHERE item_code=%s AND price_list='Standard Buying'""", row['item_code'], as_dict=1)[0]
+            item_price_query = frappe.db.sql("""SELECT name FROM `tabItem Price` WHERE item_code=%s AND price_list='Standard Buying'""", row['item_code'], as_dict=1)
 
-            item_price = frappe.get_doc('Item Price', item_price_query.name)
-            item_price.price_list_rate = row['new_price']
-            item_price.save()
+            # If the Item Price is already exist
+            if item_price_query:
+                item_price = frappe.get_doc('Item Price', item_price_query[0].name)
+                item_price.price_list_rate = row['new_price']
+                item_price.save()
+            else:
+                print 'Item Price for {0} does not exist. Creating one.'.format(row['item_code'])
+                item_price = frappe.get_doc({
+                    'doctype': 'Item Price',
+                    'price_list': 'Standard Buying',
+                    'price_list_rate': row['new_price']
+                })
+                item_price.insert()
 
         print 'Finished processing...'

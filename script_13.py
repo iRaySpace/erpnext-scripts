@@ -23,6 +23,7 @@ def update_item_price(**kwargs):
                 print 'Item Price for {0} does not exist. Creating one.'.format(row['item_code'])
                 item_price = frappe.get_doc({
                     'doctype': 'Item Price',
+                    'item_code': row['item_code'],
                     'price_list': 'Standard Buying',
                     'price_list_rate': row['new_price']
                 })

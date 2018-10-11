@@ -8,7 +8,7 @@ def add_item_tax(**kwargs):
     file_path = get_site_path('public', 'files', kwargs['file'])
 
     company_name = frappe.defaults.get_global_default('company')
-    company = frappe.get_cached_value('Company', company_name, ['abbr'], as_dict=True)
+    company = frappe.get_doc('Company', company_name)
 
     with open(file_path) as csv_file:
         reader = csv.DictReader(csv_file)

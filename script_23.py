@@ -1,8 +1,10 @@
 import frappe
 
 
-def set_user_role_profile(user, role_profile):
+def set_user_role_profile(**kwargs):
     """Set user role profile"""
+    user = kwargs['user']
+    role_profile = kwargs['role_profile']
     try:
         user = frappe.get_doc('User', user)
         user.role_profile_name = role_profile

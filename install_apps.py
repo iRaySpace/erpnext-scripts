@@ -16,7 +16,7 @@ def execute(**kwargs):
         if app not in apps_installed:
             print 'Installing app {0}'.format(app)
 
-            frappe.init(site=frappe.local.site)
+            frappe.init(site=kwargs['site'])
             frappe.connect()
 
             try:

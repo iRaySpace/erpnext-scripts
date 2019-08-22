@@ -19,12 +19,17 @@ def run(**kwargs):
         print("Processed {}/{}".format(processed, len(items)))
 
 
-def run_two():
-    items = frappe.get_all('Item')
+def run_two(**kwargs):
+    warehouse = kwargs.get('warehouse')
+    items = frappe.get_all('Item Default', filters={'default_warehouse': ''}, fields=['name'])
+
+    total_length = len(items)
     processed = 0
+
     for item in items:
-        item_doc = frappe.get_doc('Item', item['name'])
-        item_doc.item_defaults = []
-        item_doc.save()
+        frappe.db.set_value('Item Default', item['name'], 'default_warehouse', warehouse)
         processed = processed + 1
-        print("Processed {}/{}".format(processed, len(items)))
+        print('Processed {}/{}'.format(processed, total_length))
+
+    frappe.db.commit()
+

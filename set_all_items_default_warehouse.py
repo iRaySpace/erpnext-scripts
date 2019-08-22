@@ -17,3 +17,14 @@ def run(**kwargs):
         item_doc.save()
         processed = processed + 1
         print("Processed {}/{}".format(processed, len(items)))
+
+
+def run_two():
+    items = frappe.get_all('Item')
+    processed = 0
+    for item in items:
+        item_doc = frappe.get_doc('Item', item['name'])
+        item_doc.item_defaults = []
+        item_doc.save()
+        processed = processed + 1
+        print("Processed {}/{}".format(processed, len(items)))

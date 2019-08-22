@@ -33,3 +33,25 @@ def run_two(**kwargs):
 
     frappe.db.commit()
 
+
+def pre_process(**kwargs):
+    length = kwargs['length']
+    items = frappe.get_all('Item')
+    processed = 0
+
+    for item in items:
+        if processed == length:
+            break
+
+        exists = frappe.db.sql("""
+            SELECT 1 FROM `tabItem Default` WHERE parent=%(item)s
+        """, {'item': item['name']})
+
+        if exists:
+            continue
+
+        item_doc = frappe.get_doc('Item', item['name'])
+        item_doc.save()
+
+        processed = processed + 1
+        print("Processed {} item(s)".format(processed))
